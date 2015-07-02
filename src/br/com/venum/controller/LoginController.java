@@ -1,8 +1,10 @@
 package br.com.venum.controller;
 
-import org.springframework.stereotype.Controller;
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Named;
 
-@Controller
+@Named
+@SessionScoped
 public class LoginController {
 
 

@@ -2,19 +2,23 @@ package br.com.venum.controller;
 
 import java.util.List;
 
-import javax.persistence.EntityManager;
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.com.venum.dao.LeilaoDao;
 import br.com.venum.modelo.Leilao;
-import br.com.venum.util.JPAUtil;
 
 
-@Controller
+@Named
+@SessionScoped
 public class LeilaoController {
+	
+	@Inject
+	private LeilaoDao leilaoDao;
 
 	@RequestMapping("formLeilao")
 	public String executa(){
@@ -24,13 +28,7 @@ public class LeilaoController {
 	@RequestMapping("adicionaLeilao")
 	public String adiciona (Leilao l){
 		
-		
-		EntityManager manager = new JPAUtil().getEntityManager();
-		LeilaoDao dao = new LeilaoDao(manager);
-		manager.getTransaction().begin();
-		dao.adiciona(l);
-		manager.getTransaction().commit();
-		manager.close();
+		this.leilaoDao.adiciona(l);
 		System.out.println("Produto Adicionado" + l.getProduto());
 		return "confirmacao";
 		
@@ -39,9 +37,7 @@ public class LeilaoController {
 	@RequestMapping("listaLeilao")
 	public String lista(Model model) {
 		
-		EntityManager manager = new JPAUtil().getEntityManager();
-		LeilaoDao dao = new LeilaoDao(manager);
-		List<Leilao> leiloes = dao.lista();
+		List<Leilao> leiloes = leilaoDao.lista();
 		model.addAttribute("leiloes", leiloes);
 		return "lista-leilao";
 	}

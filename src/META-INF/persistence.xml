@@ -8,17 +8,5 @@
 	
 		<jta-data-source>java:/venumDS</jta-data-source>
 		
-	
-		<properties>
-		
-			
-			
-			<property name="hibernate.connection.useUnicode" value="true"/>
-			<property name="hibernate.connection.characterEncoding" value="UTF-8"/>
-			<property name="hibernate.generate_statistics" value="true"></property>
-			<property name="hibernate.connection.charSet" value="UTF-8"/>
-			
-			
-		</properties>
 	</persistence-unit>
 </persistence>

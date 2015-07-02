@@ -2,19 +2,18 @@ package br.com.venum.dao;
 
 import java.util.List;
 
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 import br.com.venum.modelo.Leilao;
 
-
+@Stateless
 public class LeilaoDao {
 
 
-private EntityManager manager;
-	
-	public LeilaoDao(EntityManager manager) {
-		this.manager = manager;
-	}
+	@PersistenceContext
+	EntityManager manager;
 	
 	
 	///Metodos DAO GRUD

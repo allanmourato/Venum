@@ -2,17 +2,18 @@ package br.com.venum.dao;
 
 import java.util.List;
 
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 import br.com.venum.modelo.Reputacao;
 
+@Stateless
 public class ReputacaoDao {
 	
-private EntityManager manager;
-	
-	public ReputacaoDao(EntityManager manager) {
-		this.manager = manager;
-	}
+
+	@PersistenceContext
+	EntityManager manager;
 	
 	
 	///Metodos DAO GRUD

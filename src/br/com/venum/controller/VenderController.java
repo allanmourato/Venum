@@ -2,19 +2,23 @@ package br.com.venum.controller;
 
 import java.util.List;
 
-import javax.persistence.EntityManager;
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.com.venum.dao.VenderDao;
 import br.com.venum.modelo.Vender;
-import br.com.venum.util.JPAUtil;
 
 
-@Controller
+@Named
+@SessionScoped
 public class VenderController {
+	
+	@Inject
+	public VenderDao venderDao;
 	
 	@RequestMapping("formVender")
 	public String executa(){
@@ -25,13 +29,7 @@ public class VenderController {
 	@RequestMapping("adicionaProduto")
 	public String adiciona (Vender v){
 		
-		
-		EntityManager manager = new JPAUtil().getEntityManager();
-		VenderDao dao = new VenderDao(manager);
-		manager.getTransaction().begin();
-		dao.adiciona(v);
-		manager.getTransaction().commit();
-		manager.close();
+		venderDao.adiciona(v);
 		System.out.println("Produto Adicionado" + v.getProduto());
 		return "confirmacao";
 		
@@ -40,9 +38,7 @@ public class VenderController {
 	@RequestMapping("listaVendas")
 	public String lista(Model model) {
 		
-		EntityManager manager = new JPAUtil().getEntityManager();
-		VenderDao dao = new VenderDao(manager);
-		List<Vender> vendas = dao.lista();
+		List<Vender> vendas = venderDao.lista();
 		model.addAttribute("vendas", vendas);
 		return "lista-vendas";
 	}

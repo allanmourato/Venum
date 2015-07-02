@@ -2,17 +2,20 @@ package br.com.venum.dao;
 
 import java.util.List;
 
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 import br.com.venum.modelo.Trocar;
 
+@Stateless
 public class TrocarDao {
 	
-private EntityManager manager;
 	
-	public TrocarDao(EntityManager manager) {
-		this.manager = manager;
-	}
+	@PersistenceContext
+	EntityManager manager;
+	
+	
 	
 	
 	///Metodos DAO GRUD

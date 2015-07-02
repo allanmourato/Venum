@@ -1,9 +1,12 @@
 package br.com.venum.controller;
 
-import org.springframework.stereotype.Controller;
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Named;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@Controller
+@Named
+@SessionScoped
 public class IndexController {
 	
 	@RequestMapping("/")

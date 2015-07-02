@@ -3,19 +3,19 @@ package br.com.venum.dao;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 import br.com.venum.modelo.Vender;
 
+@Stateless
 public class VenderDao {
 	
-private EntityManager manager;
+	@PersistenceContext
+	EntityManager manager;
 	
-	public VenderDao(EntityManager manager) {
-		this.manager = manager;
-	}
-	
-	
+
 	///Metodos DAO GRUD
 	
 	public void adiciona(Vender vender){

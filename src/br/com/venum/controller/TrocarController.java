@@ -2,19 +2,23 @@ package br.com.venum.controller;
 
 import java.util.List;
 
-import javax.persistence.EntityManager;
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.com.venum.dao.TrocarDao;
 import br.com.venum.modelo.Trocar;
-import br.com.venum.util.JPAUtil;
 
 
-@Controller
+@Named
+@SessionScoped
 public class TrocarController {
+	
+	@Inject
+	public TrocarDao trocarDao;
 	
 	@RequestMapping("formTrocar")
 	public String executa(){
@@ -24,13 +28,7 @@ public class TrocarController {
 	@RequestMapping("adicionaTrocar")
 	public String adiciona (Trocar t){
 		
-		
-		EntityManager manager = new JPAUtil().getEntityManager();
-		TrocarDao dao = new TrocarDao(manager);
-		manager.getTransaction().begin();
-		dao.adiciona(t);
-		manager.getTransaction().commit();
-		manager.close();
+		trocarDao.adiciona(t);
 		System.out.println("Produto Adicionado" + t.getProduto());
 		return "confirmacao";
 		
@@ -39,9 +37,7 @@ public class TrocarController {
 	@RequestMapping("listaTrocar")
 	public String lista(Model model) {
 		
-		EntityManager manager = new JPAUtil().getEntityManager();
-		TrocarDao dao = new TrocarDao(manager);
-		List<Trocar> trocas = dao.lista();
+		List<Trocar> trocas = trocarDao.lista();
 		model.addAttribute("trocas", trocas);
 		return "lista-trocar";
 	}

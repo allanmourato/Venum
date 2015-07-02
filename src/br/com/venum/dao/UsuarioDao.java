@@ -2,21 +2,18 @@ package br.com.venum.dao;
 
 import java.util.List;
 
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 import br.com.venum.modelo.Usuario;
 
-
+@Stateless
 public class UsuarioDao {
 	
-	private EntityManager manager;
 	
-	
-	public UsuarioDao(EntityManager manager) {
-		this.manager = manager;
-	}
-	
-	
+	@PersistenceContext
+	EntityManager manager;
 	
 	
 	///Metodos DAO GRUD
